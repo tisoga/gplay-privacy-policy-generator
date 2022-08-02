@@ -1,0 +1,17 @@
+FROM node:alpine as webapp
+WORKDIR /app
+ENV PORT 80
+ENV HOST 0.0.0.0
+COPY package.json .
+COPY yarn.lock .
+RUN yarn install
+COPY . .
+RUN yarn build
+
+FROM nginx:alpine
+COPY --from=webapp "/app/build" "/usr/share/nginx/html"
+RUN rm /etc/nginx/conf.d/default.conf
+COPY nginx/nginx.conf /etc/nginx/conf.d
+
+EXPOSE 3000
+CMD ["nginx","-g","daemon off;"]
