@@ -43,7 +43,7 @@ function App() {
           <Route
             path='*'
             element={
-              <ErrorPage errorMsg={'Page not Found'}/>
+              <ErrorPage errorMsg={'404 Page not Found'} Redirect={false}/>
             }
           />
         </Routes>

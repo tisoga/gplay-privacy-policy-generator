@@ -76,6 +76,7 @@ const InputPage = () => {
     }
 
     useEffect(() => {
+        document.title = 'Generate Your Privacy Policy for Android App'
         setinputData({
             ...inputData, informationApp: {
                 ...inputData.informationApp, userInformation: []

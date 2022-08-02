@@ -12,7 +12,7 @@ const PrivacyPolicy = () => {
     const { data, setData, modalNotification, setModalNotification } = useContext(DataContext)
     const [loading, setLoading] = useState(false)
     const [isModalOpen, setModal] = useState(false)
-    let [searchParams ] = useSearchParams();
+    let [searchParams] = useSearchParams();
     const { id } = useParams();
     const db = getFirestore()
     let navigate = useNavigate()
@@ -36,6 +36,7 @@ const PrivacyPolicy = () => {
                 // console.log(informationApp)
                 setData(res)
                 setLoading(false)
+                document.title = `Privacy Policy ${res.appName}`
             }
             else {
                 setLoading(false)
@@ -43,6 +44,7 @@ const PrivacyPolicy = () => {
             }
         }
         if (searchParams.get('generated') === 'true') {
+            document.title = `Privacy Policy ${data.appName}`
             setModalNotification({
                 ...modalNotification,
                 isOpen: true,
@@ -52,6 +54,7 @@ const PrivacyPolicy = () => {
             })
         }
         else if (searchParams.get('hosting') === 'true') {
+            document.title = `Privacy Policy ${data.appName}`
             setModalNotification({
                 ...modalNotification,
                 isOpen: true,
@@ -105,7 +108,7 @@ const PrivacyPolicy = () => {
 
     if (!data.developerName) {
         return (
-            <ErrorPage errorMsg={'Something Wrong!'} />
+            <ErrorPage errorMsg={'Something Wrong!'} Redirect={true} />
         )
     }
 
